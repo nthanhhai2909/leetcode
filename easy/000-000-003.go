@@ -5,7 +5,7 @@ import "fmt"
 /*
 *
 
-Leetcode: https://leetcode.com/problems/merge-sorted-array/
+Leetcode: https://leetcode.com/problems/c/
 You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
 
 Merge nums1 and nums2 into a single array sorted in non-decreasing order.
@@ -43,9 +43,9 @@ nums2.length == n
 Follow up: Can you come up with an algorithm that runs in O(m + n) time?
 */
 func main() {
-	nums1 := []int{1, 2, 3, 0, 0, 0}
-	nums2 := []int{2, 5, 6}
-	mergeV1(nums1, 3, nums2, 3)
+	nums1 := []int{1, 4, 6, 7, 8, 10, 0, 0, 0, 0}
+	nums2 := []int{1, 2, 7, 9}
+	mergeV2(nums1, 6, nums2, 4)
 	fmt.Println(nums1)
 }
 
@@ -76,5 +76,34 @@ func mergeV1(nums1 []int, m int, nums2 []int, n int) {
 	for i := 0; i < m+n; i++ {
 		nums1[i] = ans[i]
 	}
+}
 
+func mergeV2(nums1 []int, m int, nums2 []int, n int) {
+	ind1 := m - 1
+	ind2 := n - 1
+	ind3 := m + n - 1
+
+	for ind3 >= 0 && ind1 >= 0 && ind2 >= 0 {
+		if nums1[ind1] >= nums2[ind2] {
+			nums1[ind3] = nums1[ind1]
+			ind1--
+		} else {
+			nums1[ind3] = nums2[ind2]
+			ind2--
+		}
+
+		ind3--
+	}
+
+	for ind1 >= 0 {
+		nums1[ind3] = nums1[ind1]
+		ind1--
+		ind3--
+	}
+
+	for ind2 >= 0 {
+		nums1[ind3] = nums2[ind2]
+		ind2--
+		ind3--
+	}
 }
