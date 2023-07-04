@@ -37,7 +37,7 @@ s and goal consist of lowercase letters.
 */
 
 func main() {
-	fmt.Print(buddyStrings("abac", "abad"))
+	fmt.Print(buddyStringsV2("aa", "aa"))
 }
 
 func buddyStrings(s string, goal string) bool {
@@ -75,4 +75,37 @@ func buddyStrings(s string, goal string) bool {
 		}
 	}
 	return dif == 2 && arrs[0] == arrs[3] && arrs[1] == arrs[2]
+}
+
+func buddyStringsV2(s string, goal string) bool {
+	sSize := len(s)
+	goalSize := len(goal)
+	if sSize != goalSize {
+		return false
+	}
+
+	arrs := make([]int, 0)
+	mems := make([]int, 26)
+	for i := 0; i < sSize; i++ {
+		mems[s[i]-97]++
+		if s[i] != goal[i] {
+			arrs = append(arrs, i)
+		}
+
+		if len(arrs) > 2 {
+			return false
+		}
+	}
+	if len(arrs) == 2 && s[arrs[0]] == goal[arrs[1]] && s[arrs[1]] == goal[arrs[0]] {
+		return true
+	}
+
+	if len(arrs) == 0 {
+		for i := 0; i < 26; i++ {
+			if mems[i] >= 2 {
+				return true
+			}
+		}
+	}
+	return false
 }
