@@ -75,7 +75,9 @@ func main() {
 	//fmt.Println(addNegabinary([]int{0}, []int{1}))
 	//fmt.Println(addNegabinary([]int{1, 0, 1, 0, 1, 0, 1}, []int{1, 1, 1, 0, 1, 0, 0}))
 	//fmt.Println(convertDecimalToNegabinary(22))
-	fmt.Println(addNegabinary([]int{1}, []int{1, 1, 0, 1}))
+	//fmt.Println(addNegabinary([]int{1}, []int{1, 1, 0, 1}))
+	//fmt.Println(addNegabinaryV2([]int{1}, []int{1, 1, 0, 1}))
+	fmt.Println(-1 & 1)
 
 }
 
@@ -113,6 +115,41 @@ func addNegabinary(arr1 []int, arr2 []int) []int {
 	ind := len(ans) - 1
 	for len(ans) > 1 && ans[ind] == 0 {
 		ans = ans[:len(ans)-1]
+		ind--
+	}
+	reverse(ans)
+	return ans
+}
+
+func addNegabinaryV2(arr1 []int, arr2 []int) []int {
+	ind1 := len(arr1) - 1
+	ind2 := len(arr2) - 1
+	carry := 0
+	ans := make([]int, 0)
+	for ind1 >= 0 || ind2 >= 0 || carry != 0 {
+		val1 := 0
+		val2 := 0
+		if ind1 >= 0 {
+			val1 = arr1[ind1]
+			ind1--
+		}
+
+		if ind2 >= 0 {
+			val2 = arr2[ind2]
+			ind2--
+		}
+
+		number := val1 + val2 + carry
+		bit := number & 1
+		ans = append(ans, bit)
+		carry = -(number >> 1)
+	}
+
+	// remove leading zeros
+	ind := len(ans) - 1
+	for len(ans) > 1 && ans[ind] == 0 {
+		ans = ans[:len(ans)-1]
+		ind--
 	}
 	reverse(ans)
 	return ans
@@ -122,13 +159,6 @@ func reverse(s []int) {
 	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
 		s[i], s[j] = s[j], s[i]
 	}
-}
-
-func Abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
 }
 
 /*
