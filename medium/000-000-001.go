@@ -70,14 +70,13 @@ so the result is 110011001−2 (1 − 8 + 16 − 128 + 256 = 137).
 */
 
 func main() {
-	//fmt.Println(addNegabinary([]int{0}, []int{1, 0}))
-	//fmt.Println(addNegabinary([]int{0}, []int{0}))
-	//fmt.Println(addNegabinary([]int{0}, []int{1}))
-	//fmt.Println(addNegabinary([]int{1, 0, 1, 0, 1, 0, 1}, []int{1, 1, 1, 0, 1, 0, 0}))
-	//fmt.Println(convertDecimalToNegabinary(22))
-	//fmt.Println(addNegabinary([]int{1}, []int{1, 1, 0, 1}))
-	//fmt.Println(addNegabinaryV2([]int{1}, []int{1, 1, 0, 1}))
-	fmt.Println(-1 & 1)
+	fmt.Println(addNegabinary([]int{0}, []int{1, 0}))
+	fmt.Println(addNegabinary([]int{0}, []int{0}))
+	fmt.Println(addNegabinary([]int{0}, []int{1}))
+	fmt.Println(addNegabinary([]int{1, 0, 1, 0, 1, 0, 1}, []int{1, 1, 1, 0, 1, 0, 0}))
+	fmt.Println(convertDecimalToNegabinary(22))
+	fmt.Println(addNegabinary([]int{1}, []int{1, 1, 0, 1}))
+	fmt.Println(addNegabinaryV2([]int{1}, []int{1, 1, 0, 1}))
 
 }
 
