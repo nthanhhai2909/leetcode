@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 /*
 Leetcode: https://leetcode.com/problems/find-in-mountain-array/
 
@@ -54,10 +50,9 @@ func NewMountainArray(arr []int) *MountainArray {
 	}
 }
 
+var m map[int]int
+
 func (this *MountainArray) get(index int) int {
-	if this.count >= 100 {
-		panic("failed")
-	}
 	this.count++
 	return this.arr[index]
 }
@@ -70,7 +65,7 @@ func binarySearch(mountainArray *MountainArray, start int, end int, target int, 
 	index := mountainArray.length()
 	for start <= end {
 		mid := (start + end) / 2
-		sort := compare(mountainArray.get(mid), target)
+		sort := compare(get(mid, mountainArray), target)
 		if sort < 0 {
 			start = mid + 1
 		} else if sort > 0 {
@@ -83,6 +78,7 @@ func binarySearch(mountainArray *MountainArray, start int, end int, target int, 
 }
 
 func findInMountainArray(target int, mountainArr *MountainArray) int {
+	m = make(map[int]int)
 	ans := doSearch(0, mountainArr.length()-1, target, mountainArr)
 	if ans == mountainArr.length() {
 		return -1
@@ -94,26 +90,38 @@ func doSearch(start, end, target int, mountainArr *MountainArray) int {
 	ans := mountainArr.length()
 	mid := (start + end) / 2
 	if mid == 0 {
-		return min(binarySearch(mountainArr, start, end, target, func(i, j int) int { return i - j }), ans)
+		return min(binarySearch(mountainArr, start, end, target, less), ans)
 	}
 
 	if mid == mountainArr.length()-1 {
-		return min(binarySearch(mountainArr, start, end, target, func(i, j int) int { return j - i }), ans)
+		return min(binarySearch(mountainArr, start, end, target, bigger), ans)
 	}
 
-	midVal := mountainArr.get(mid)
-	if mid > 0 && midVal >= mountainArr.get(mid-1) {
-		ans = min(binarySearch(mountainArr, start, mid, target, func(i, j int) int { return i - j }), ans)
+	midVal := get(mid, mountainArr)
+	if mid > 0 && midVal >= get(mid-1, mountainArr) {
+		if target <= midVal {
+			ans = min(binarySearch(mountainArr, start, mid, target, less), ans)
+		}
 	} else {
 		ans = min(doSearch(start, mid-1, target, mountainArr), ans)
 	}
 
-	if mid < mountainArr.length()-1 && midVal >= mountainArr.get(mid+1) {
-		ans = min(binarySearch(mountainArr, mid, end, target, func(i, j int) int { return j - i }), ans)
+	if mid < mountainArr.length()-1 && midVal >= get(mid+1, mountainArr) {
+		if target <= midVal {
+			ans = min(binarySearch(mountainArr, mid, end, target, bigger), ans)
+		}
 	} else {
 		ans = min(doSearch(mid+1, end, target, mountainArr), ans)
 	}
 	return ans
+}
+
+func less(i, j int) int {
+	return i - j
+}
+
+func bigger(i, j int) int {
+	return j - i
 }
 
 func min(a, b int) int {
@@ -123,23 +131,11 @@ func min(a, b int) int {
 	return b
 }
 
-func main() {
-	test1()
-	test2()
-}
-
-func test1() {
-	fmt.Println("---------------------------- Test 01 ----------------------------")
-	mountainArray := NewMountainArray([]int{1, 2, 3, 4, 5, 4, 3, 2, 1, 0})
-	fmt.Println("ans:", findInMountainArray(2, mountainArray))
-	fmt.Println("ans:", findInMountainArray(9, mountainArray))
-	fmt.Println("ans:", findInMountainArray(5, mountainArray))
-	fmt.Println("-----------------------------------------------------------------")
-}
-
-func test2() {
-	fmt.Println("---------------------------- Test 02 ----------------------------")
-	mountainArray := NewMountainArray([]int{3, 5, 3, 2, 0})
-	fmt.Println("ans:", findInMountainArray(0, mountainArray))
-	fmt.Println("-----------------------------------------------------------------")
+func get(ind int, mountainArr *MountainArray) int {
+	if val, ok := m[ind]; ok {
+		return val
+	}
+	val := mountainArr.get(ind)
+	m[ind] = val
+	return val
 }
