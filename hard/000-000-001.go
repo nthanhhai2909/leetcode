@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /*
 Leetcode: https://leetcode.com/problems/find-in-mountain-array/
 
@@ -61,6 +63,7 @@ func (this *MountainArray) length() int {
 	return len(this.arr)
 }
 
+// -------------------------------------------------------- Version 1 ---------------------------------------------------
 func binarySearch(mountainArray *MountainArray, start int, end int, target int, compare func(i, j int) int) int {
 	index := mountainArray.length()
 	for start <= end {
@@ -139,3 +142,59 @@ func get(ind int, mountainArr *MountainArray) int {
 	m[ind] = val
 	return val
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+func binarySearchV2(mountainArray *MountainArray, start int, end int, target int, compare func(i, j int) int) int {
+	index := mountainArray.length()
+	for start <= end {
+		mid := (start + end) / 2
+		sort := compare(mountainArray.get(mid), target)
+		if sort < 0 {
+			start = mid + 1
+		} else if sort > 0 {
+			end = mid - 1
+		} else {
+			return mid
+		}
+	}
+	return index
+}
+
+func findInMountainArrayV2(target int, mountainArr *MountainArray) int {
+	l := 0
+	r := mountainArr.length() - 1
+	m := 0
+	for l <= r {
+		m = (l + r) / 2
+		mV := mountainArr.get(m)
+		rV := mountainArr.get(m + 1)
+
+		if mV <= rV {
+			l = m
+		}
+		if mV >= rV {
+			r = m
+		}
+		if r == l+1 {
+			m = r
+			break
+		}
+	}
+
+	ans1 := binarySearchV2(mountainArr, 0, m, target, less)
+	ans2 := binarySearchV2(mountainArr, m+1, mountainArr.length()-1, target, bigger)
+	res := min(ans1, ans2)
+	if res == mountainArr.length() {
+		return -1
+	}
+
+	return res
+}
+
+func main() {
+	arr := NewMountainArray([]int{1, 2, 3, 4, 5, 3, 1})
+	fmt.Println(findInMountainArrayV2(3, arr))
+}
+
+// -------------------------------------------------------- Version 2 --------------------------------------------------
