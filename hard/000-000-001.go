@@ -184,13 +184,14 @@ func findInMountainArrayV2(target int, mountainArr *MountainArray) int {
 	}
 
 	ans1 := binarySearchV2(mountainArr, 0, m, target, less)
-	ans2 := binarySearchV2(mountainArr, m+1, mountainArr.length()-1, target, bigger)
-	res := min(ans1, ans2)
-	if res == mountainArr.length() {
-		return -1
+	if ans1 != mountainArr.length() {
+		return ans1
 	}
-
-	return res
+	ans2 := binarySearchV2(mountainArr, m+1, mountainArr.length()-1, target, bigger)
+	if ans2 != mountainArr.length() {
+		return ans2
+	}
+	return -1
 }
 
 func main() {
