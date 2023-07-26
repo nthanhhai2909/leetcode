@@ -50,21 +50,26 @@ func countSquares(matrix [][]int) int {
 		return 0
 	}
 	n := len(matrix[0])
-	for i := m - 2; i >= 0; i-- {
-		for j := n - 2; j >= 0; j-- {
-			if matrix[i][j] > 0 && matrix[i][j+1] > 0 && matrix[i+1][j] > 0 && matrix[i+1][j+1] > 0 {
-				matrix[i][j] += min(matrix[i][j+1], matrix[i+1][j], matrix[i+1][j+1])
+	cur_m := make([]int, n)
+	bef_m := make([]int, n)
+	for i := m - 1; i >= 0; i-- {
+		for j := n - 1; j >= 0; j-- {
+			cur_m[j] = matrix[i][j]
+			if i == m-1 || j == n-1 {
+				ans += matrix[i][j]
+			} else {
+				if matrix[i][j] > 0 {
+					cur_m[j] = min(cur_m[j+1], bef_m[j], bef_m[j+1]) + 1
+				}
+				ans += cur_m[j]
 			}
 		}
-	}
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
-			ans += matrix[i][j]
+		for k := 0; k < n; k++ {
+			bef_m[k] = cur_m[k]
 		}
 	}
 	return ans
 }
-
 func min(a, b, c int) int {
 	if a <= b && a <= c {
 		return a
