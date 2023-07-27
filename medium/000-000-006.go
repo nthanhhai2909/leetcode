@@ -55,14 +55,10 @@ func countSquares(matrix [][]int) int {
 	for i := m - 1; i >= 0; i-- {
 		for j := n - 1; j >= 0; j-- {
 			cur_m[j] = matrix[i][j]
-			if i == m-1 || j == n-1 {
-				ans += matrix[i][j]
-			} else {
-				if matrix[i][j] > 0 {
-					cur_m[j] = min(cur_m[j+1], bef_m[j], bef_m[j+1]) + 1
-				}
-				ans += cur_m[j]
+			if i != m-1 && j != n-1 && matrix[i][j] > 0 {
+				cur_m[j] = min(cur_m[j+1], bef_m[j], bef_m[j+1]) + 1
 			}
+			ans += cur_m[j]
 		}
 		for k := 0; k < n; k++ {
 			bef_m[k] = cur_m[k]
