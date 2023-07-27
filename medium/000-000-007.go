@@ -36,10 +36,39 @@ func totalSteps(nums []int) int {
 	if size == 0 {
 		return 0
 	}
-
-	return 0
+	m := make(map[int]struct{})
+	ans := 0
+	for {
+		p1 := 0
+		p2 := 1
+		temp := make([]int, 0)
+		for p2 < len(nums) {
+			if _, ok := m[p1]; ok {
+				p1++
+				p2++
+				continue
+			}
+			if _, ok := m[p2]; ok {
+				p2++
+				continue
+			}
+			if nums[p1] > nums[p2] {
+				temp = append(temp, p2)
+			}
+			p1 = p2
+			p2++
+		}
+		if len(temp) == 0 {
+			break
+		}
+		for _, val := range temp {
+			m[val] = struct{}{}
+		}
+		ans++
+	}
+	return ans
 }
 
 func main() {
-	fmt.Println(totalSteps([]int{10, 1, 2, 3, 4, 5, 6, 1, 2, 3}))
+	fmt.Println(totalSteps([]int{5, 3, 4, 4, 7, 3, 6, 11, 8, 5, 11})) // 3
 }
