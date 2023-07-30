@@ -38,10 +38,12 @@ func totalSteps(nums []int) int {
 	}
 	m := make(map[int]struct{})
 	ans := 0
+	start := 0
 	for {
-		p1 := 0
-		p2 := 1
+		p1 := start
+		p2 := start + 1
 		temp := make([]int, 0)
+		isSet := false
 		for p2 < len(nums) {
 			if _, ok := m[p1]; ok {
 				p1++
@@ -54,6 +56,10 @@ func totalSteps(nums []int) int {
 			}
 			if nums[p1] > nums[p2] {
 				temp = append(temp, p2)
+				if !isSet {
+					start = p1
+				}
+				isSet = true
 			}
 			p1 = p2
 			p2++
@@ -69,6 +75,42 @@ func totalSteps(nums []int) int {
 	return ans
 }
 
+// ----------------------------------------------------------------------------------
+type Pair struct {
+	Key   int
+	Value int
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}
+
+func totalStepsV2(nums []int) int {
+	size := len(nums)
+	if size == 0 {
+		return 0
+	}
+	stack := make([]Pair, 0)
+	stack = append(stack, Pair{nums[size-1], 0})
+	ans := 0
+	for i := size - 2; i >= 0; i-- {
+		c := 0
+		for len(stack) > 0 && nums[i] > stack[len(stack)-1].Key {
+			value := stack[len(stack)-1].Value
+			stack = stack[:len(stack)-1]
+			c = max(c+1, value)
+		}
+		stack = append(stack, Pair{nums[i], c})
+		ans = max(ans, c)
+	}
+	return ans
+}
+
 func main() {
-	fmt.Println(totalSteps([]int{5, 3, 4, 4, 7, 3, 6, 11, 8, 5, 11})) // 3
+	fmt.Println(totalStepsV2([]int{7, 14, 4, 14, 13, 2, 6, 13}))
+
 }
