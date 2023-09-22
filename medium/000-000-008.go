@@ -29,26 +29,18 @@ Constraints:
 1 <= nums[i] <= 109
 */
 
-func main() {
-	nums := []int{1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192}
-	fmt.Println(specialPerm(nums))
-}
-
 // back-tracking
 func specialPerm(nums []int) int {
-	mod := 1000000007
-	ans := 0
+
 	end := 0
 	for ind := range nums {
 		end = end | (1 << ind)
 	}
-	for ind := range nums {
-		ans = (ans + count(1<<ind, end, 1, nums[ind], nums)%mod) % mod
-	}
-	return ans
+	return count(0, end, 1, 1, nums)
 }
 
 func count(mask, end, last, val int, nums []int) int {
+	mod := 1000000007
 	if !isGood(val, last) {
 		return 0
 	}
@@ -58,14 +50,12 @@ func count(mask, end, last, val int, nums []int) int {
 	}
 
 	ans := 0
-
 	for cur, nV := range nums {
 		if mask&(1<<cur) == 0 {
-			ans += count(mask|(1<<(cur)), end, val, nV, nums)
+			ans = (ans + count(mask|(1<<(cur)), end, val, nV, nums)%mod) % mod
 		}
 	}
 	return ans
-
 }
 
 func isGood(a, b int) bool {
@@ -73,4 +63,9 @@ func isGood(a, b int) bool {
 		return true
 	}
 	return false
+}
+
+func main() {
+	nums := []int{1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192}
+	fmt.Println(specialPerm(nums))
 }
