@@ -28,31 +28,26 @@ Constraints:
 2 <= nums.length <= 14
 1 <= nums[i] <= 109
 */
-
 // back-tracking
 func specialPerm(nums []int) int {
 
-	end := 0
-	for ind := range nums {
-		end = end | (1 << ind)
-	}
-	return count(0, end, 1, 1, nums)
+	return count(0, 1, 1, nums)
 }
 
-func count(mask, end, last, val int, nums []int) int {
+func count(mask, last, val int, nums []int) int {
 	mod := 1000000007
 	if !isGood(val, last) {
 		return 0
 	}
 
-	if mask == end {
+	if mask == 1<<len(nums)-1 {
 		return 1
 	}
 
 	ans := 0
 	for cur, nV := range nums {
 		if mask&(1<<cur) == 0 {
-			ans = (ans + count(mask|(1<<(cur)), end, val, nV, nums)%mod) % mod
+			ans = (ans + count(mask|(1<<(cur)), val, nV, nums)%mod) % mod
 		}
 	}
 	return ans
