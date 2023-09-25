@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /*
 2741. Special Permutations: https://leetcode.com/problems/special-permutations/
@@ -28,14 +30,23 @@ Constraints:
 2 <= nums.length <= 14
 1 <= nums[i] <= 109
 */
-// back-tracking
-func specialPerm(nums []int) int {
 
-	return count(0, 1, 1, nums)
+const mod = 1000000007
+
+func specialPerm(nums []int) int {
+	size := len(nums)
+	dp := make(map[int][]int, size)
+	for _, val := range nums {
+		dp[val] = make([]int, 1<<size)
+		for ind := range dp[val] {
+			dp[val][ind] = -1
+		}
+	}
+	ans := count(0, 1, 1, nums, dp)
+	return ans
 }
 
-func count(mask, last, val int, nums []int) int {
-	mod := 1000000007
+func count(mask, last, val int, nums []int, dp map[int][]int) int {
 	if !isGood(val, last) {
 		return 0
 	}
@@ -44,11 +55,19 @@ func count(mask, last, val int, nums []int) int {
 		return 1
 	}
 
+	if _, ok := dp[val]; ok && dp[val][mask] != -1 {
+		return dp[val][mask]
+	}
+
 	ans := 0
 	for cur, nV := range nums {
 		if mask&(1<<cur) == 0 {
-			ans = (ans + count(mask|(1<<(cur)), val, nV, nums)%mod) % mod
+			ans = (ans + count(mask|(1<<(cur)), val, nV, nums, dp)%mod) % mod
 		}
+	}
+
+	if _, ok := dp[val]; ok {
+		dp[val][mask] = ans
 	}
 	return ans
 }
@@ -61,6 +80,6 @@ func isGood(a, b int) bool {
 }
 
 func main() {
-	nums := []int{1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192}
+	nums := []int{2, 4, 8, 16}
 	fmt.Println(specialPerm(nums))
 }
