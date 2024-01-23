@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
-/**
+/*
+*
 
 Leetcode: https://leetcode.com/problems/sort-even-and-odd-indices-independently/
 
@@ -16,8 +16,6 @@ For example, if nums = [4,1,2,3] before this step, it becomes [4,3,2,1] after. T
 Sort the values at even indices of nums in non-decreasing order.
 For example, if nums = [4,1,2,3] before this step, it becomes [2,1,4,3] after. The values at even indices 0 and 2 are sorted in non-decreasing order.
 Return the array formed after rearranging the values of nums.
-
-
 
 Example 1:
 
@@ -37,18 +35,11 @@ Explanation:
 Since there is exactly one odd index and one even index, no rearrangement of values takes place.
 The resultant array formed is [2,1], which is the same as the initial array.
 
-
 Constraints:
 
 1 <= nums.length <= 100
 1 <= nums[i] <= 100
 */
-
-func main() {
-	nums := []int{4, 1, 2, 3}
-	ans := sortEvenOdd(nums)
-	fmt.Println(ans)
-}
 func sortEvenOdd(nums []int) []int {
 	size := len(nums)
 	if size <= 2 {

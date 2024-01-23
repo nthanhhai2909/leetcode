@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 /*
 2741. Special Permutations: https://leetcode.com/problems/special-permutations/
 You are given a 0-indexed integer array nums containing n distinct positive integers. A permutation of nums is called special if:
@@ -77,9 +73,4 @@ func isGood(a, b int) bool {
 		return true
 	}
 	return false
-}
-
-func main() {
-	nums := []int{2, 4, 8, 16}
-	fmt.Println(specialPerm(nums))
 }

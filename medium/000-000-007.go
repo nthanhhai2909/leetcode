@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /*
 Leetcode: https://leetcode.com/problems/steps-to-make-array-non-decreasing/
 
@@ -108,9 +106,4 @@ func totalStepsV2(nums []int) int {
 		ans = max(ans, c)
 	}
 	return ans
-}
-
-func main() {
-	fmt.Println(totalStepsV2([]int{7, 14, 4, 14, 13, 2, 6, 13}))
-
 }

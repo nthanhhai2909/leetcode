@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -74,12 +73,3 @@ func canTalk(l1, l2 []int) bool {
 	}
 	return false
 }
-
-func main() {
-	fmt.Println("Min: ", minimumTeachings(3,
-		[][]int{{2}, {1, 3}, {1, 2}, {3}},
-		[][]int{{1, 4}, {1, 2}, {3, 4}, {2, 3}})) // expected 3
-	//fmt.Println("Min: ", minimumTeachings(2, [][]int{{1}, {2}, {1, 2}}, [][]int{{1, 2}, {1, 3}, {2, 3}}))
-}
-
-// ---------------------------------------------------------------------------------------------------------------------

@@ -26,14 +26,6 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func main() {
-	printResult(deleteDuplicates(&ListNode{Val: 1, Next: &ListNode{Val: 1, Next: &ListNode{Val: 2, Next: &ListNode{Val: 3, Next: &ListNode{Val: 3, Next: nil}}}}}))
-	printResult(deleteDuplicates(&ListNode{Val: 1, Next: &ListNode{Val: 1, Next: &ListNode{Val: 1, Next: nil}}}))
-	printResult(deleteDuplicates(&ListNode{Val: 1, Next: &ListNode{Val: 2, Next: &ListNode{Val: 3, Next: nil}}}))
-	printResult(deleteDuplicates(&ListNode{Val: 1, Next: nil}))
-	printResult(deleteDuplicates(nil))
-}
-
 func printResult(head *ListNode) {
 	fmt.Println("------------------------------------------------------------------")
 	for head != nil {

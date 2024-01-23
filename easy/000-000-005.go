@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 /*
 Leetcode: https://leetcode.com/problems/buddy-strings/
 Given two strings s and goal, return true if you can swap two letters in s so the result is equal to goal, otherwise, return false.
@@ -35,10 +31,6 @@ Constraints:
 1 <= s.length, goal.length <= 2 * 104
 s and goal consist of lowercase letters.
 */
-
-func main() {
-	fmt.Print(buddyStringsV2("aa", "aa"))
-}
 
 func buddyStrings(s string, goal string) bool {
 	sSize := len(s)

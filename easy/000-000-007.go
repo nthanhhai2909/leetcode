@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -34,15 +33,4 @@ func abs(a int) int {
 		return -a
 	}
 	return a
-}
-
-// ------------------------------v------------------------------------------------------------
-
-func main() {
-
-	seats := []int{3, 1, 5}
-	students := []int{2, 7, 4}
-
-	fmt.Println(minMovesToSeat(seats, students))
-	fmt.Println("go again!")
 }

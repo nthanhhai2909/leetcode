@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /**
 Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
@@ -46,8 +44,4 @@ func isValid(s string) bool {
 		}
 	}
 	return len(stack) == 0
-}
-
-func main() {
-	fmt.Println(isValid("()[]{}"))
 }

@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /*
 Leetcode: https://leetcode.com/problems/count-square-submatrices-with-all-ones/
 
@@ -75,14 +73,4 @@ func min(a, b, c int) int {
 		return b
 	}
 	return c
-}
-
-func main() {
-	matrix1 := [][]int{
-		{1, 1, 0, 0, 1},
-		{1, 0, 1, 1, 1},
-		{1, 1, 1, 1, 1},
-		{1, 0, 1, 0, 1},
-		{0, 0, 1, 0, 1}}
-	fmt.Println(countSquares(matrix1))
 }

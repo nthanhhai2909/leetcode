@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /*
 *
 
@@ -42,12 +40,6 @@ nums2.length == n
 
 Follow up: Can you come up with an algorithm that runs in O(m + n) time?
 */
-func main() {
-	nums1 := []int{1, 4, 6, 7, 8, 10, 0, 0, 0, 0}
-	nums2 := []int{1, 2, 7, 9}
-	mergeV2(nums1, 6, nums2, 4)
-	fmt.Println(nums1)
-}
 
 func mergeV1(nums1 []int, m int, nums2 []int, n int) {
 	p1 := 0

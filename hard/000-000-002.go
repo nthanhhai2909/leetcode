@@ -38,13 +38,8 @@ Constraints:
 1 <= nums.length <= 105
 1 <= k <= nums.length
 
- */
+*/
 
 func minKBitFlips(nums []int, k int) int {
-
-}
-
-
-func main() {
 
 }

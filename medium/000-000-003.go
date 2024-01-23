@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 /*
 Leetcode:https://leetcode.com/problems/binary-tree-level-order-traversal/
 */
@@ -43,7 +39,4 @@ func levelOrder(root *TreeNode) [][]int {
 		}
 	}
 	return ans
-}
-func main() {
-	fmt.Println(levelOrder(&TreeNode{Val: 1, Left: &TreeNode{Val: 2, Left: &TreeNode{Val: 4}}, Right: &TreeNode{Val: 3, Left: &TreeNode{Val: 5}}}))
 }

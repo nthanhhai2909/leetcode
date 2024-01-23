@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /*
 *
 
@@ -24,11 +22,6 @@ Input: prices = [7,6,4,3,1]
 Output: 0
 Explanation: In this case, no transactions are done and the max profit = 0.
 */
-
-func main() {
-	a1 := []int{7, 1, 5, 3, 6, 4}
-	fmt.Printf("Max profit: %d", maxProfitV1(a1))
-}
 
 // Brute force
 func maxProfitV1(prices []int) int {
