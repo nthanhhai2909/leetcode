@@ -69,12 +69,6 @@ so the result is 110011001−2 (1 − 8 + 16 − 128 + 256 = 137).
 
 */
 
-func main() {
-	fmt.Println(addNegabinary([]int{1, 1, 1, 1, 1}, []int{1, 0, 1}))
-	fmt.Println(addNegabinaryV2([]int{1, 1, 1, 1, 1}, []int{1, 0, 1}))
-	fmt.Println(addNegabinaryV3([]int{1, 1, 1, 1, 1}, []int{1, 0, 1}))
-}
-
 func addNegabinary(arr1 []int, arr2 []int) []int {
 	ind1 := len(arr1) - 1
 	ind2 := len(arr2) - 1
