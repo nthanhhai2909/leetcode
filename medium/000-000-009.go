@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -106,8 +105,4 @@ func bt(num int, cur_count int, sum int, cur_state map[int]int, result *[]int) {
 		}
 
 	}
-}
-
-func main() {
-	fmt.Print(nextBeautifulNumberV2(1000))
 }
