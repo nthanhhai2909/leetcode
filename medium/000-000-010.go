@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 	"strconv"
 	"strings"
@@ -34,9 +33,4 @@ func convertTimePointToMinutes(timePoints []string) []int {
 		ans = append(ans, minute+hour*60)
 	}
 	return ans
-}
-
-func main() {
-	timePoints := []string{"00:00", "23:59", "00:00"}
-	fmt.Println(findMinDifference(timePoints))
 }
