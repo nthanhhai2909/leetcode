@@ -6,6 +6,8 @@ import (
 )
 
 // Link: https://leetcode.com/problems/heaters/
+// Solution 1: Sort 2 array [houses, heaters] and then using 2-pointers
+// N - Len houses, M - Len Heaters -> NLogN + MLogM + N, assume N ~ M => NLogN
 func findRadius(houses []int, heaters []int) int {
 	sort.Slice(houses, func(i, j int) bool { return houses[i] < houses[j] })
 	sort.Slice(heaters, func(i, j int) bool { return heaters[i] < heaters[j] })
