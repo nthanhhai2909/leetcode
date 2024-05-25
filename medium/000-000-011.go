@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -89,12 +88,4 @@ func findRadiusV2(houses []int, heaters []int) int {
 		}
 	}
 	return ans
-}
-
-func main() {
-	fmt.Println(findRadiusV2([]int{1, 2, 3, 5, 15}, []int{2, 30}), "13")
-	fmt.Println(findRadiusV2([]int{1, 5}, []int{10}), "9")
-	fmt.Println(findRadiusV2([]int{1, 1, 1, 1, 1, 1, 999, 999, 999, 999, 999}, []int{499, 500, 501}), "498")
-	fmt.Println(findRadiusV2([]int{282475249, 622650073, 984943658, 144108930, 470211272, 101027544, 457850878, 458777923},
-		[]int{823564440, 115438165, 784484492, 74243042, 114807987, 137522503, 441282327, 16531729, 823378840, 143542612}), "161834419")
 }
