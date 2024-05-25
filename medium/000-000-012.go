@@ -1,6 +1,6 @@
 package main
 
-// Link: https://leetcode.com/problems/permutations/s
+// Link: https://leetcode.com/problems/permutations/
 /**
 Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
 
@@ -27,6 +27,10 @@ Constraints:
 All the integers of nums are unique.
 */
 
+/*
+	TC: O(n.n!)
+	SC: O(n.n!)
+*/
 func permute(nums []int) [][]int {
 	ans := make([][]int, 0)
 	size := len(nums)
