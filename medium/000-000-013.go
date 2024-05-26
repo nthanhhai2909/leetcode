@@ -30,6 +30,11 @@ Constraints:
 -10 <= nums[i] <= 10
 */
 
+/*
+	TC: O(n.n!)
+	SC: O(n.n!)
+*/
+
 func permuteUnique(nums []int) [][]int {
 	ans := make([][]int, 0)
 	sort.Slice(nums, func(i, j int) bool { return nums[i] < nums[j] })
@@ -42,9 +47,6 @@ func bkPermuteUnique(ans *[][]int, nums []int, cur []int, mem []bool, level int)
 	if level == len(nums) {
 		*ans = append(*ans, cur)
 		return
-	}
-	if level == 1 {
-		fmt.Println(level, ":", cur)
 	}
 	fMatch := false
 	var prev int
