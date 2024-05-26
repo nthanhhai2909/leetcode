@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -70,8 +69,4 @@ func bkPermuteUnique(ans *[][]int, nums []int, cur []int, mem []bool, level int)
 			bkPermuteUnique(ans, nums, newCur, newMem, level+1)
 		}
 	}
-}
-
-func main() {
-	fmt.Println(permuteUnique([]int{2, 2, 1, 1}))
 }
