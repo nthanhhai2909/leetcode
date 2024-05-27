@@ -91,6 +91,42 @@ func findAllRecipes(recipes []string, ingredients [][]string, supplies []string)
 	return ans
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
+/*
+	TC: O(M.N)
+	Solution: topological-sort - https://www.interviewcake.com/concept/java/topological-sort
+*/
+func findAllRecipesV2(recipes []string, ingredients [][]string, supplies []string) []string {
+	ans := make([]string, 0)
+	graph := make(map[string][]string)
+	indegrees := make(map[string]int)
+	availables := make([]string, 0)
+
+	for ind, recipe := range recipes {
+		for _, ingred := range ingredients[ind] {
+			graph[ingred] = append(graph[ingred], recipe)
+			indegrees[recipe]++
+		}
+	}
+
+	availables = append(availables, supplies...)
+
+	for len(availables) > 0 {
+		current := availables[0]
+		availables = availables[1:]
+		for _, dependentRecipe := range graph[current] {
+			indegrees[dependentRecipe]--
+			if indegrees[dependentRecipe] == 0 {
+				availables = append(availables, dependentRecipe)
+				ans = append(ans, dependentRecipe)
+			}
+		}
+	}
+
+	return ans
+}
+
 func main() {
-	fmt.Println(findAllRecipes([]string{"bread"}, [][]string{{"yeast", "flour"}}, []string{"yeast", "flour", "corn"}))
+	fmt.Println(findAllRecipesV2([]string{"bread"}, [][]string{{"yeast", "flour"}}, []string{"yeast", "flour", "corn"}))
 }
