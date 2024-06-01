@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // Link: https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/description/
 
 /*
@@ -125,8 +123,4 @@ func findAllRecipesV2(recipes []string, ingredients [][]string, supplies []strin
 	}
 
 	return ans
-}
-
-func main() {
-	fmt.Println(findAllRecipesV2([]string{"bread"}, [][]string{{"yeast", "flour"}}, []string{"yeast", "flour", "corn"}))
 }
